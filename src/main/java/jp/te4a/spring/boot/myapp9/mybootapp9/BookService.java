@@ -11,10 +11,12 @@ import java.util.List;
 public class BookService {
    @Autowired
    BookRepository bookRepository;
-   public void delete(Integer id) { delete(id); }
+   public void delete(Integer id) { 
+      bookRepository.deleteById(id); 
+   }
    public List<BookForm> findAll() {
-      List<BookBean> beanList = bookRepository.findAll();
-      List<BookForm> formList = new ArrayList<BookForm>();
+      List<BookBean> beanList = bookRepository.findAllOrderByTitle();
+      List<BookForm> formList = new ArrayList<>();
       for(BookBean bookBean: beanList) {
          BookForm bookForm = new BookForm();
          BeanUtils.copyProperties(bookBean, bookForm);
@@ -22,17 +24,11 @@ public class BookService {
       }
       return formList;
    }
-   public BookForm save(BookForm bookForm) {
+   public BookForm saveOrUpdate(BookForm bookForm) {
       BookBean bookBean = new BookBean();
       BeanUtils.copyProperties(bookForm, bookBean);
       bookRepository.save(bookBean);
       return bookForm;
-     }
-     public BookForm update(BookForm bookForm) {
-      BookBean bookBean = new BookBean();
-      BeanUtils.copyProperties(bookForm, bookBean);
-      bookRepository.save(bookBean);
-      return bookForm;
-     }
+  }
      
 }

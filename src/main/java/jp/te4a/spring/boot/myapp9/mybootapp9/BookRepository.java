@@ -7,5 +7,6 @@ import java.util.List;
 
 @Repository
 public interface BookRepository extends JpaRepository<BookBean, Integer>{
-    @Query("SELECT X FROM BookBean X ORDER BY X.title")List<BookBean> findAllOrderByTitle();
+    @Query("SELECT X FROM BookBean X ORDER BY X.title")
+    List<BookBean> findAllOrderByTitle();
 }
