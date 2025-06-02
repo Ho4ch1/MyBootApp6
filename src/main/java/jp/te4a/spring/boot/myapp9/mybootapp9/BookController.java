@@ -33,7 +33,7 @@ public class BookController {
     }
     @PostMapping(path = "edit")
     String edit(@RequestParam Integer id, BookForm form) {
-        bookService.saveOrUpdate(form);
+        bookService.save(form);
         return "redirect:/books";
     }
     @PostMapping(path = "delete")

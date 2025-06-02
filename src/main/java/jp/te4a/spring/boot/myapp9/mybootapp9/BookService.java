@@ -12,19 +12,24 @@ public class BookService {
    @Autowired
    BookRepository bookRepository;
    public BookForm create(BookForm bookForm) {
-      bookForm.setId(bookRepository.getBookId());
       BookBean bookBean = new BookBean();
       BeanUtils.copyProperties(bookForm, bookBean);
       bookRepository.save(bookBean);
       return bookForm;
    }
-   public BookForm update(BookForm bookForm) {
+   public BookForm save(BookForm bookForm) {
       BookBean bookBean = new BookBean();
       BeanUtils.copyProperties(bookForm, bookBean);
-      bookRepository.update(bookBean);
+      bookRepository.save(bookBean);
       return bookForm;
-   }
-   public void delete(Integer id) { delete(BookBean); }
+     }
+     public BookForm update(BookForm bookForm) {
+      BookBean bookBean = new BookBean();
+      BeanUtils.copyProperties(bookForm, bookBean);
+      bookRepository.save(bookBean);
+      return bookForm;
+     }
+   public void delete(Integer id) { bookRepository.deleteById(id); }
    public List<BookForm> findAll() {
       List<BookBean> beanList = bookRepository.findAll();
       List<BookForm> formList = new ArrayList<BookForm>();
@@ -36,19 +41,9 @@ public class BookService {
       return formList;
    }
    public BookForm findOne(Integer id) {
-      BookBean bookBean = findMyId(int);
+      BookBean bookBean = findById(id);
       BookForm bookForm = new BookForm();
       BeanUtils.copyProperties(bookBean, bookForm);
       return bookForm;
    }
-   BookRepository bookRepository;
-   public void delete(Integer id) { 
-      bookRepository.deleteById(id); 
-   }
-   }
-   public BookForm saveOrUpdate(BookForm bookForm) {
-      BookBean bookBean = new BookBean();
-      BeanUtils.copyProperties(bookForm, bookBean);
-      bookRepository.save(bookBean);
-      return bookForm;
-  }  
+}
