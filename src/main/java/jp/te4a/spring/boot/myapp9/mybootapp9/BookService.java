@@ -41,9 +41,10 @@ public class BookService {
       return formList;
    }
    public BookForm findOne(Integer id) {
-      BookBean bookBean = findById(id);
       BookForm bookForm = new BookForm();
-      BeanUtils.copyProperties(bookBean, bookForm);
+      bookRepository.findById(id).ifPresent(bookBean->{
+         BeanUtils.copyProperties(bookBean, bookForm);
+      });
       return bookForm;
    }
 }
