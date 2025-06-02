@@ -27,7 +27,7 @@ public class BookController {
     }
     @PostMapping(path = "edit", params = "form")
     String editForm(@RequestParam Integer id, BookForm form) {
-        BookForm bookForm = bookService.findById(id);
+        BookForm bookForm = findById(id);
         BeanUtils.copyProperties(bookForm, form);
         return "books/edit";
     }
